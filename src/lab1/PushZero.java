@@ -8,25 +8,20 @@ public class PushZero
     static void pushZerosToBeginning(int arr[], int n)
     {
         int [] temp = new int[n];
-        int count = 0;
+        int j=0;
         for (int i = 0; i < n; i++) {
             if(arr[i] == 0){
-                count++;
+                temp[j++]=0;
             }
         }
-        for (int i = 0; i < count; i++) {
-            temp[i] = 0;
-        }
-        for (int i = 0; i < n; i++) {
-            if (arr[i]!=0){
-                temp[count++]=arr[i];
-            }
-        }
-        arr = temp;
         System.out.println("Transformiranata niza e:");
         for (int i = 0; i < n; i++) {
-            System.out.print(arr[i] + " ");
+            if (arr[i]!=0){
+                temp[j++]=arr[i];
+            }
+            System.out.print(temp[i] + " ");
         }
+        arr = temp;
     }
 
     public static void main (String[] args)

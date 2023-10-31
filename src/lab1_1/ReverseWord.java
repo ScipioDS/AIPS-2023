@@ -2,7 +2,14 @@ package lab1_1;
 import java.util.Scanner;
 
 public class ReverseWord {
-
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int x = scanner.nextInt();
+        for (int i = 0; i < x; i++) {
+            String word = scanner.next();
+            printReversed(word);
+        }
+    }
     public static void printReversed(String word) {
         char ch;
         String new_word = "";
@@ -11,14 +18,5 @@ public class ReverseWord {
             new_word = ch + new_word;
         }
         System.out.println(new_word);
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int x = scanner.nextInt();
-        for (int i = 0; i < x; i++) {
-            String word = scanner.next();
-            printReversed(word);
-        }
     }
 }
