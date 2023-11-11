@@ -1,52 +1,7 @@
-package lab2_2;
+package FirstPartialExercises;
 
 import java.util.Scanner;
 
-class Card {
-    private int type;
-    private int health;
-    private int magicPower;
-
-    public Card(int type, int health, int magicPower) {
-        this.type = type;
-        this.health = health;
-        this.magicPower = magicPower;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getMagicPower() {
-        return magicPower;
-    }
-
-    public void setMagicPower(int magicPower) {
-        this.magicPower = magicPower;
-    }
-
-    public int significance() {
-        return health * magicPower;
-    }
-
-
-    @Override
-    public String toString() {
-        return String.valueOf(type);
-    }
-}
 
 class SLLNode<E> {
     protected E element;
@@ -74,7 +29,7 @@ class SLL<E> {
         first = null;
     }
 
-    public int size() {
+    public int length() {
         int ret;
         if (first != null) {
             SLLNode<E> tmp = first;
@@ -97,7 +52,7 @@ class SLL<E> {
             ret += tmp;
             while (tmp.succ != null) {
                 tmp = tmp.succ;
-                ret += " " + tmp;
+                ret += "->" + tmp;
             }
         } else
             ret = "Prazna lista!!!";
@@ -201,50 +156,58 @@ class SLL<E> {
         }
         return first;
     }
+    public void mirror() {
+        if (first != null) {
+            //m=nextsucc, p=tmp,q=next
+            SLLNode<E> tmp = first;
+            SLLNode<E> newsucc = null;
+            SLLNode<E> next;
+
+            while(tmp != null){
+                next = tmp.succ;
+                tmp.succ = newsucc;
+                newsucc = tmp;
+                tmp = next;
+            }
+            first = newsucc;
+        }
+    }
 }
 
-public class MysticalCardGame {
+public class DeleteSLL {
 
-    //TODO: implement function
-    public static void startDuel(SLL<Card> firstSorcererCards, SLL<Card> secondSorcererCards) {
-        int sig=0;
-        SLLNode<Card> theCard = firstSorcererCards.getFirst();
-        SLLNode<Card> tmp = firstSorcererCards.getFirst();
+    public static void change(SLL<Integer> list, int br) {
+        SLLNode<Integer> tmp = list.getFirst();
+        int counter = 0;
         while (tmp!=null){
-            if (tmp.element.significance()>sig){
-                theCard = tmp;
-                sig = tmp.element.significance();
+            if (tmp.element == br){
+
+                counter++;
             }
             tmp = tmp.succ;
         }
-        tmp = secondSorcererCards.getFirst();
-        for (int i = 0; i < secondSorcererCards.size() / 2; i++) {
-            tmp = tmp.succ;
+        if (counter%2==1){
+            tmp = list.getFirst();
+            while (tmp.element!=br){
+                tmp = tmp.succ;
+            }
+            list.insertAfter(br,tmp);
         }
-        Card one = new Card(theCard.element.getType(),theCard.element.getHealth(),theCard.element.getMagicPower());
-        firstSorcererCards.delete(theCard);
-        secondSorcererCards.insertBefore(one,tmp);
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        SLL<Card> firstSorcererCards = new SLL<Card>();
-        SLL<Card> secondSorcererCards = new SLL<Card>();
-
-        for (int i = 0; i < 8; i++) {
-            String line = scanner.nextLine();
-            String[] parts = line.split("\\s+");
-            firstSorcererCards.insertLast(new Card(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2])));
+        // TODO Auto-generated method stub
+        Scanner scan = new Scanner(System.in);
+        int n, broj;
+        SLL<Integer> list1 = new SLL<Integer>();
+        n = scan.nextInt();
+        for(int i = 0; i<n; i++) {
+            list1.insertLast(scan.nextInt());
         }
+        int br = scan.nextInt();
+        change(list1,br);
+        System.out.println(list1);
 
-        for (int i = 0; i < 8; i++) {
-            String line = scanner.nextLine();
-            String[] parts = line.split("\\s+");
-            secondSorcererCards.insertLast(new Card(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2])));
-        }
 
-        startDuel(firstSorcererCards, secondSorcererCards);
-        System.out.println(firstSorcererCards);
-        System.out.println(secondSorcererCards);
     }
 }

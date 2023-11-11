@@ -1,6 +1,5 @@
-package lab2_1;
+package lab2;
 
-import java.util.LinkedList;
 import java.util.Scanner;
 
 class SLLNode<E> {

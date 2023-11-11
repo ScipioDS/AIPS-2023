@@ -1,5 +1,4 @@
-package lab1_2;
-import java.util.Arrays;
+package lab1;
 import java.util.Scanner;
 
 class QuarterlySales {

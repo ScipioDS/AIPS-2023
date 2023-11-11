@@ -1,4 +1,4 @@
-package lab1_1;
+package lab1;
 import java.util.Scanner;
 
 public class ReverseWord {
