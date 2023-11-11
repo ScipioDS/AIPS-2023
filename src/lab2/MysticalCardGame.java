@@ -48,11 +48,11 @@ class Card {
     }
 }
 
-class SLLNode<E> {
+class SLLNodeCardGame<E> {
     protected E element;
-    protected SLLNode<E> succ;
+    protected SLLNodeCardGame<E> succ;
 
-    public SLLNode(E elem, SLLNode<E> succ) {
+    public SLLNodeCardGame(E elem, SLLNodeCardGame<E> succ) {
         this.element = elem;
         this.succ = succ;
     }
@@ -63,10 +63,10 @@ class SLLNode<E> {
     }
 }
 
-class SLL<E> {
-    private SLLNode<E> first;
+class SLLCardGame<E> {
+    private SLLNodeCardGame<E> first;
 
-    public SLL() {
+    public SLLCardGame() {
         this.first = null;
     }
 
@@ -77,7 +77,7 @@ class SLL<E> {
     public int size() {
         int ret;
         if (first != null) {
-            SLLNode<E> tmp = first;
+            SLLNodeCardGame<E> tmp = first;
             ret = 1;
             while (tmp.succ != null) {
                 tmp = tmp.succ;
@@ -93,7 +93,7 @@ class SLL<E> {
     public String toString() {
         String ret = new String();
         if (first != null) {
-            SLLNode<E> tmp = first;
+            SLLNodeCardGame<E> tmp = first;
             ret += tmp;
             while (tmp.succ != null) {
                 tmp = tmp.succ;
@@ -105,22 +105,22 @@ class SLL<E> {
     }
 
     public void insertFirst(E o) {
-        SLLNode<E> ins = new SLLNode<E>(o, first);
+        SLLNodeCardGame<E> ins = new SLLNodeCardGame<E>(o, first);
         first = ins;
     }
 
-    public void insertAfter(E o, SLLNode<E> node) {
+    public void insertAfter(E o, SLLNodeCardGame<E> node) {
         if (node != null) {
-            SLLNode<E> ins = new SLLNode<E>(o, node.succ);
+            SLLNodeCardGame<E> ins = new SLLNodeCardGame<E>(o, node.succ);
             node.succ = ins;
         } else {
             System.out.println("Dadenot jazol e null");
         }
     }
 
-    public void insertBefore(E o, SLLNode<E> before) {
+    public void insertBefore(E o, SLLNodeCardGame<E> before) {
         if (first != null) {
-            SLLNode<E> tmp = first;
+            SLLNodeCardGame<E> tmp = first;
             if (first == before) {
                 this.insertFirst(o);
                 return;
@@ -128,7 +128,7 @@ class SLL<E> {
             while (tmp.succ != before)
                 tmp = tmp.succ;
             if (tmp.succ == before) {
-                SLLNode<E> ins = new SLLNode<E>(o, before);
+                SLLNodeCardGame<E> ins = new SLLNodeCardGame<E>(o, before);
                 tmp.succ = ins;
             } else {
                 System.out.println("Elementot ne postoi vo listata");
@@ -140,10 +140,10 @@ class SLL<E> {
 
     public void insertLast(E o) {
         if (first != null) {
-            SLLNode<E> tmp = first;
+            SLLNodeCardGame<E> tmp = first;
             while (tmp.succ != null)
                 tmp = tmp.succ;
-            SLLNode<E> ins = new SLLNode<E>(o, null);
+            SLLNodeCardGame<E> ins = new SLLNodeCardGame<E>(o, null);
             tmp.succ = ins;
         } else {
             insertFirst(o);
@@ -152,7 +152,7 @@ class SLL<E> {
 
     public E deleteFirst() {
         if (first != null) {
-            SLLNode<E> tmp = first;
+            SLLNodeCardGame<E> tmp = first;
             first = first.succ;
             return tmp.element;
         } else {
@@ -161,9 +161,9 @@ class SLL<E> {
         }
     }
 
-    public E delete(SLLNode<E> node) {
+    public E delete(SLLNodeCardGame<E> node) {
         if (first != null) {
-            SLLNode<E> tmp = first;
+            SLLNodeCardGame<E> tmp = first;
             if (first == node) {
                 return this.deleteFirst();
             }
@@ -182,13 +182,13 @@ class SLL<E> {
         }
     }
 
-    public SLLNode<E> getFirst() {
+    public SLLNodeCardGame<E> getFirst() {
         return first;
     }
 
-    public SLLNode<E> find(E o) {
+    public SLLNodeCardGame<E> find(E o) {
         if (first != null) {
-            SLLNode<E> tmp = first;
+            SLLNodeCardGame<E> tmp = first;
             while (tmp.element != o && tmp.succ != null)
                 tmp = tmp.succ;
             if (tmp.element == o) {
@@ -206,10 +206,10 @@ class SLL<E> {
 public class MysticalCardGame {
 
     //TODO: implement function
-    public static void startDuel(SLL<Card> firstSorcererCards, SLL<Card> secondSorcererCards) {
+    public static void startDuel(SLLCardGame<Card> firstSorcererCards, SLLCardGame<Card> secondSorcererCards) {
         int sig=0;
-        SLLNode<Card> theCard = firstSorcererCards.getFirst();
-        SLLNode<Card> tmp = firstSorcererCards.getFirst();
+        SLLNodeCardGame<Card> theCard = firstSorcererCards.getFirst();
+        SLLNodeCardGame<Card> tmp = firstSorcererCards.getFirst();
         while (tmp!=null){
             if (tmp.element.significance()>sig){
                 theCard = tmp;
@@ -228,8 +228,8 @@ public class MysticalCardGame {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        SLL<Card> firstSorcererCards = new SLL<Card>();
-        SLL<Card> secondSorcererCards = new SLL<Card>();
+        SLLCardGame<Card> firstSorcererCards = new SLLCardGame<Card>();
+        SLLCardGame<Card> secondSorcererCards = new SLLCardGame<Card>();
 
         for (int i = 0; i < 8; i++) {
             String line = scanner.nextLine();
