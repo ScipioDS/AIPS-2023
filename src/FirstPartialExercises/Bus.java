@@ -16,23 +16,11 @@ public class Bus {
         br.close();
 
         // Vasiot kod tuka
-        int minTotal = 0;
-        int maxTotal = 0;
+        int maxTotal = (N*100) + (M-1)*100, minTotal = N*100;
+        if (M>N && M!=0){ minTotal += (M-N)*100;}
+        else if (M==0) { maxTotal = minTotal;}
 
-        if (M>N && M!=0){
-            minTotal = (N*100) + (M-N)*100;
-            maxTotal = (N*100) + (M-1)*100;
-        } else if (M!=0){
-            minTotal = N*100;
-            maxTotal = minTotal + (M-1)*100;
-        } else {
-            minTotal = N*100;
-            maxTotal = minTotal;
-        }
-
-        System.out.println(minTotal);
-        System.out.println(maxTotal);
-
+        System.out.println(minTotal + "\n" + maxTotal);
     }
 
 }
