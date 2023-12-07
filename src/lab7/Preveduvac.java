@@ -1,20 +1,20 @@
-import java.io.BufferedReader;
+package lab7;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
-class MapEntry<K extends Comparable<K>,E> implements Comparable<K> {
+class AMapEntry<K extends Comparable<K>,E> implements Comparable<K> {
     K key;
     E value;
 
-    public MapEntry (K key, E val) {
+    public AMapEntry (K key, E val) {
         this.key = key;
         this.value = val;
     }
 
     public int compareTo (K that) {
         @SuppressWarnings("unchecked")
-        MapEntry<K,E> other = (MapEntry<K,E>) that;
+        AMapEntry<K,E> other = (AMapEntry<K,E>) that;
         return this.key.compareTo(other.key);
     }
 
@@ -26,25 +26,25 @@ class MapEntry<K extends Comparable<K>,E> implements Comparable<K> {
 
 class OBHT<K extends Comparable<K>,E> {
 
-    private MapEntry<K,E>[] buckets;
+    private AMapEntry<K,E>[] buckets;
 
     static final int NONE = -1;
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    private static final MapEntry former = new MapEntry(null, null);
+    private static final AMapEntry former = new AMapEntry(null, null);
 
     private int occupancy = 0;
 
     @SuppressWarnings("unchecked")
     public OBHT (int m) {
-        buckets = (MapEntry<K,E>[]) new MapEntry[m];
+        buckets = (AMapEntry<K,E>[]) new AMapEntry[m];
     }
 
     private int hash (K key) {
         return Math.abs(key.hashCode()) % buckets.length;
     }
 
-    public MapEntry<K,E> getBucket(int i){
+    public AMapEntry<K,E> getBucket(int i){
         return buckets[i];
     }
 
@@ -52,7 +52,7 @@ class OBHT<K extends Comparable<K>,E> {
     public int search (K targetKey) {
         int b = hash(targetKey);
         for (;;) {
-            MapEntry<K,E> oldEntry = buckets[b];
+            AMapEntry<K,E> oldEntry = buckets[b];
             if (oldEntry == null)
                 return NONE;
             else if (targetKey.equals(oldEntry.key))
@@ -64,10 +64,10 @@ class OBHT<K extends Comparable<K>,E> {
 
 
     public void insert (K key, E val) {
-        MapEntry<K,E> newEntry = new MapEntry<K,E>(key, val);
+        AMapEntry<K,E> newEntry = new AMapEntry<K,E>(key, val);
         int b = hash(key);
         for (;;) {
-            MapEntry<K,E> oldEntry = buckets[b];
+            AMapEntry<K,E> oldEntry = buckets[b];
             if (oldEntry == null) {
                 if (++occupancy == buckets.length) {
                     System.out.println("Hash tabelata e polna!!!");
@@ -88,7 +88,7 @@ class OBHT<K extends Comparable<K>,E> {
     public void delete (K key) {
         int b = hash(key);
         for (;;) {
-            MapEntry<K,E> oldEntry = buckets[b];
+            AMapEntry<K,E> oldEntry = buckets[b];
             if (oldEntry == null)
                 return;
             else if (key.equals(oldEntry.key)) {
@@ -119,9 +119,9 @@ class OBHT<K extends Comparable<K>,E> {
     public OBHT<K,E> clone () {
         OBHT<K,E> copy = new OBHT<K,E>(buckets.length);
         for (int i = 0; i < buckets.length; i++) {
-            MapEntry<K,E> e = buckets[i];
+            AMapEntry<K,E> e = buckets[i];
             if (e != null&&e != former)
-                copy.buckets[i] = new MapEntry<K,E>(e.key, e.value);
+                copy.buckets[i] = new AMapEntry<K,E>(e.key, e.value);
             else
                 copy.buckets[i] = e;
         }
