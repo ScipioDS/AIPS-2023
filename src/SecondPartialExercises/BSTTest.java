@@ -1,4 +1,4 @@
-// BinarySearchTree class
+package SecondPartialExercises;// BinarySearchTree class
 
 //
 // CONSTRUCTION: with no initializer
